@@ -40,13 +40,19 @@ output            : papaja::apa6_pdf
 ---
 
 ```{r setup, include = FALSE}
+library(knitr)
 library("papaja")
+library(ggplot2)
+library(here)
+library(rio)
+library(janitor)
+library(dplyr)
+opts_chunk$set(echo = FALSE, fig.width = 6.5, fig.height = 8)
 ```
 
-```{r analysis-preferences}
-# Seed for random number generation
-set.seed(42)
-knitr::opts_chunk$set(cache.extra = knitr::rand_seed)
+```{r data import}
+data<-import(here("data","star.csv")) %>% 
+  clean_names()
 ```
 
 
