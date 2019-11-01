@@ -41,6 +41,7 @@ output            : papaja::apa6_pdf
 
 ```{r setup, include = FALSE}
 library(knitr)
+library(kableExtra)
 library("papaja")
 library(ggplot2)
 library(here)
@@ -56,23 +57,26 @@ data<-import(here("data","star.csv")) %>%
 ```
 
 
-
-# Methods
-We report how we determined our sample size, all data exclusions (if any), all manipulations, and all measures in the study. <!-- 21-word solution (Simmons, Nelson & Simonsohn, 2012; retrieved from http://ssrn.com/abstract=2160588) -->
-
-## Participants
-
-## Material
-
-## Procedure
-
-## Data analysis
-We used `r cite_r("r-references.bib")` for all our analyses.
-
+# Commit 3
+Cognitive behavioral therapy (CBT) is one of the most effective psychotherapies for psychological disorders [@zettle2015]. Trauer et al. [-@trauer2015CBT] conducted a meta-analysis on the efficacy of CBT for insomnia.
 
 # Results
+```{r eval = TRUE, echo = FALSE}
+data2 <- data %>%
+  select(sex, frl, tmathss, treadss)
 
-# Discussion
+summary_sex_frl <- data2 %>%
+  group_by(sex, frl) %>%
+  summarize(math_mean = mean(tmathss),
+            math_sd = sd(tmathss),
+            rdg_mean = mean(treadss),
+            rdg_sd = sd(treadss))
+
+kable(summary_sex_frl) %>%
+  kable_styling(bootstrap_options = c("striped", "hover", "condensed"))
+
+```
+The mean math score and standard deviation for boys under the no frl condition was `r as.numeric(summary_sex_frl[1,3])` and `r as.numeric(summary_sex_frl[1,4])`, respectively. The mean math score and standard deviation for boys under the yes frl condition was `r as.numeric(summary_sex_frl[2,3])` and `r as.numeric(summary_sex_frl[2,4])`, respectively. The mean math score and standard deviation for girls under the no frl condition was `r as.numeric(summary_sex_frl[3,3])` and `r as.numeric(summary_sex_frl[3,4])`, respectively. Finally, the mean math score and standard deviation for girls under the yes frl condition was `r as.numeric(summary_sex_frl[4,3])` and `r as.numeric(summary_sex_frl[4,4])`, respectively.   
 
 
 \newpage

@@ -1,0 +1,18 @@
+\begin{table*}[hbt]
+\ifnextchar[{\eatarg}{}
+[H]
+\centering
+\begin{tabular}{l|l|r|r|r|r}
+\hline
+sex & frl & math\_mean & math\_sd & rdg\_mean & rdg\_sd\\
+\hline
+boy & no & 492.8523 & 46.33845 & 441.4553 & 32.31828\\
+\hline
+boy & yes & 469.8716 & 46.09285 & 425.3794 & 26.62931\\
+\hline
+girl & no & 501.2057 & 45.96210 & 448.5353 & 34.52403\\
+\hline
+girl & yes & 477.5084 & 46.30459 & 430.8029 & 27.42125\\
+\hline
+\end{tabular}
+\end{table*}
