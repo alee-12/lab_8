@@ -54,6 +54,8 @@ opts_chunk$set(echo = FALSE, fig.width = 6.5, fig.height = 8)
 ```{r data import}
 data<-import(here("data","star.csv")) %>% 
   clean_names()
+
+data$frl <- as.factor(data$frl)
 ```
 
 
@@ -92,3 +94,35 @@ r_refs(file = "r-references.bib")
 
 <div id = "refs"></div>
 \endgroup
+
+
+\newpage
+
+# Commit 5
+```{r}
+
+library(plyr)
+
+data$frl <- revalue(data$frl, c("yes" = "Free/Reduced Price Meals", "no" = "Paid"))
+
+
+graph <- ggplot(data, aes(x = totexp, y = tmathss)) +
+  geom_point(color = "grey") +
+  geom_smooth(method = lm, aes(color = frl)) +
+  theme_minimal() +
+  labs(title = "Relation between teacher experience and math scores", 
+       subtitle = "Separate regression lines displayed by free/reduced price lunch status",
+       x = "Teacher Experience (years)",
+       y = "Total Math Scale Score") +
+        theme(legend.position="bottom") 
+
+
+
+graph2 <- graph + labs(color = "Lunch Status")
+
+graph2
+                       
+```
+\newpage
+The graph demonstrates that students who pay for their lunch have higher total math scale scores than students who receive free or reduced lunch. We can also see a slight increase in students' math scores if they havea teacher with more years of teaching experience. 
+
